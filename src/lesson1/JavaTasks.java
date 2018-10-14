@@ -66,10 +66,7 @@ public class JavaTasks {
      * <p>
      * В случае обнаружения неверного формата файла бросить любое исключение.
      */
-    static public void sortAddresses(String inputName, String outputName) throws IOException {
-
-
-    }
+    static public void sortAddresses(String inputName, String outputName)  { throw new NotImplementedError();}
 
     /**
      * Сортировка температур
