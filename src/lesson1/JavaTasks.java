@@ -3,8 +3,7 @@ package lesson1;
 import kotlin.NotImplementedError;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("unused")
 public class JavaTasks {
@@ -36,8 +35,28 @@ public class JavaTasks {
      * <p>
      * В случае обнаружения неверного формата файла бросить любое исключение.
      */
-    static public void sortTimes(String inputName, String outputName) {
-        throw new NotImplementedError();
+    static public void sortTimes(String inputName, String outputName) throws Exception {
+        File file = new File(inputName);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        ArrayList<Integer> list = new ArrayList<>();
+        String timetosec;
+        while ((timetosec = br.readLine()) != null) {
+            int d = Integer.parseInt(timetosec.substring(0, 2)) * 3600 +
+                    Integer.parseInt(timetosec.substring(3, 5)) * 60 +
+                    Integer.parseInt(timetosec.substring(6, 8));
+            list.add(d);
+        }
+        int[] arr = new int[list.size()];
+        for (int i = 0; i <= list.size() - 1; i++) {
+            arr[i] = list.get(i);
+        }
+        Sorts.quickSort(arr);
+        FileWriter fw = new FileWriter(new File(outputName));
+        for (int element:arr){
+            fw.write(String.format("%02d:%02d:%02d",element/3600,(element%3600)/60,element%60)+"\n");
+        }
+        fw.close();
     }
 
     /**
@@ -66,7 +85,9 @@ public class JavaTasks {
      * <p>
      * В случае обнаружения неверного формата файла бросить любое исключение.
      */
-    static public void sortAddresses(String inputName, String outputName)  { throw new NotImplementedError();}
+    static public void sortAddresses(String inputName, String outputName) {
+        throw new NotImplementedError();
+    }
 
     /**
      * Сортировка температур
@@ -121,6 +142,9 @@ public class JavaTasks {
         fw.close();
     }
 
+
+
+
     /**
      * Сортировка последовательности
      * <p>
@@ -167,12 +191,12 @@ public class JavaTasks {
         int max = 1;
         int count = 1;
         for (int i = 1; i < list.size(); i++) {
-            if(arr[i]!=arr[i-1]){
-                count=1;
-            }else count++;
-            if (max<count){
-                max=count;
-                index_max=arr[i-1];
+            if (arr[i] != arr[i - 1]) {
+                count = 1;
+            } else count++;
+            if (max < count) {
+                max = count;
+                index_max = arr[i - 1];
             }
         }
         FileWriter fw = new FileWriter(new File(outputName));
