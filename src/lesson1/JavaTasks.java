@@ -57,6 +57,8 @@ public class JavaTasks {
             fw.write(String.format("%02d:%02d:%02d",element/3600,(element%3600)/60,element%60)+"\n");
         }
         fw.close();
+        //трудоёмкост:O(log(n))
+        // ресурсоёмкост:O(n)
     }
 
     /**
@@ -140,6 +142,8 @@ public class JavaTasks {
             fw.write(String.valueOf(b) + "\n");
         }
         fw.close();
+        // трудоёмкост : O(log(n))
+        // ресурсоёмкост : O(n)
     }
 
 
@@ -209,6 +213,8 @@ public class JavaTasks {
             fw.write(String.valueOf(index_max) + "\n");
         }
         fw.close();
+        // трудоёмкост : O(n*log(n))
+        // ресурсоёмкост : O(n)
     }
 
     /**
