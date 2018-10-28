@@ -66,7 +66,7 @@ public class JavaAlgorithms {
      * <p>
      * Процедура повторяется, пока не останется один человек. Требуется вернуть его номер (в данном случае 3).
      * <p>
-     * 1 Х 3
+     * Х 1 3
      * х   4
      * 7 6 Х
      * <p>
@@ -87,7 +87,13 @@ public class JavaAlgorithms {
      * Х х Х
      */
     static public int josephTask(int menNumber, int choiceInterval) {
-        throw new NotImplementedError();
+        int result = 0;
+        for (int i = 2; i <= menNumber; i++) {
+            result = (choiceInterval + result) % i;
+        }
+        return result + 1;
+        // трудоёмкост : O(n)
+        // ресурсоёмкост : O(1)
     }
 
     /**
@@ -118,16 +124,16 @@ public class JavaAlgorithms {
                         matrix[i][j] = 1;
                     } else {
                         matrix[i][j] = matrix[i - 1][j - 1] + 1;
-                        if(matrix[i][j]>maxSubstr){
-                            maxSubstr=matrix[i][j];
-                            flag=i+1;
+                        if (matrix[i][j] > maxSubstr) {
+                            maxSubstr = matrix[i][j];
+                            flag = i + 1;
                         }
                     }
                 }
             }
         }
-        if (maxSubstr==0) return "";
-        else return firs.substring(flag-maxSubstr,flag);
+        if (maxSubstr == 0) return "";
+        else return firs.substring(flag - maxSubstr, flag);
         // трудоёмкост : O(n*m)
         // ресурсоёмкост : O(n*m)
     }
@@ -157,9 +163,9 @@ public class JavaAlgorithms {
     }
 
     static public int calcPrimesNumber(int limit) {
-        int result=0;
-        for (int i=0;i<=limit;i++){
-            if (isPrimeNumber(i)){
+        int result = 0;
+        for (int i = 0; i <= limit; i++) {
+            if (isPrimeNumber(i)) {
                 result++;
             }
         }

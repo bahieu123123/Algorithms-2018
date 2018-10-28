@@ -142,7 +142,7 @@ public class JavaTasks {
             fw.write(String.valueOf(b) + "\n");
         }
         fw.close();
-        // трудоёмкост : O(log(n))
+        // трудоёмкост : O(n*log(n))
         // ресурсоёмкост : O(n)
     }
 
