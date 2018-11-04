@@ -3,10 +3,11 @@ package lesson2;
 import kotlin.NotImplementedError;
 import kotlin.Pair;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.StrictMath.max;
 
@@ -92,7 +93,7 @@ public class JavaAlgorithms {
             result = (choiceInterval + result) % i;
         }
         return result + 1;
-        // трудоёмкост : O(n)
+        // трудоёмкост : O(n) n- menNumber
         // ресурсоёмкост : O(1)
     }
 
@@ -134,7 +135,7 @@ public class JavaAlgorithms {
         }
         if (maxSubstr == 0) return "";
         else return firs.substring(flag - maxSubstr, flag);
-        // трудоёмкост : O(n*m)
+        // трудоёмкост : O(n*m) n- firs.length m-second.length
         // ресурсоёмкост : O(n*m)
     }
 
@@ -170,7 +171,7 @@ public class JavaAlgorithms {
             }
         }
         return result;
-        // трудоёмкост : O(n^2)
+        // трудоёмкост : O(n^2) - n это лимит
         // ресурсоёмкост : O(n)
     }
 
@@ -200,7 +201,53 @@ public class JavaAlgorithms {
      * В файле буквы разделены пробелами, строки -- переносами строк.
      * Остальные символы ни в файле, ни в словах не допускаются.
      */
-    static public Set<String> baldaSearcher(String inputName, Set<String> words) {
-        throw new NotImplementedError();
+    static public Set<String> baldaSearcher(String inputName, Set<String> words) throws IOException {
+        FileReader fr = new FileReader(new File(inputName));
+        BufferedReader br = new BufferedReader(fr);
+        List<String[]> list = new ArrayList<>();
+        String str;
+        while ((str = br.readLine()) != null) {
+            String[] string=str.split(" ");
+            list.add(string);
+        }
+        String[][] matrix = new String[list.size()][list.get(0).length];
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.get(0).length; j++) {
+                matrix[i][j] = String.valueOf(list.get(i)[j]);
+            }
+        }
+        Set<String> result = new HashSet<>();
+        for (String word : words) {
+            for (int i = 0; i < list.size(); i++) {
+                for (int j = 0; j < list.get(0).length; j++) {
+                    if (matrix[i][j].equals(String.valueOf(word.charAt(0)))) {
+                        if (check(matrix, i, j, word)) {
+                            result.add(word);
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
+        static private boolean check(String[][] matrix, int row, int col, String word) {
+            if (word.length() == 1) return true;
+            if (row > 0 && matrix[row - 1][col].equals(word.valueOf(word.charAt(1)))) {
+                if (check(matrix, row - 1, col, word.substring(1))) return true;
+            }
+            if (col > 0 && matrix[row][col - 1].equals(word.valueOf(word.charAt(1)))) {
+                if (check(matrix, row, col - 1, word.substring(1))) return true;
+            }
+            if (row < matrix.length - 1 && matrix[row + 1][col].equals(word.valueOf(word.charAt(1)))) {
+                if (check(matrix, row + 1, col, word.substring(1))) return true;
+            }
+            if (col < matrix[0].length - 1 && matrix[row][col + 1].equals(word.valueOf(word.charAt(1)))) {
+                if (check(matrix, row, col + 1, word.substring(1))) return true;
+            }
+            return false;
+
+        }
+    // трудоёмкост : O(n*m) - n это число строк,m это число букв в одной строке
+    // ресурсоёмкост : O(n*m)
+
 }

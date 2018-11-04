@@ -150,6 +150,26 @@ abstract class AbstractTaskTests : AbstractFileTests() {
         } finally {
             File("temp.txt").delete()
         }
+        try {
+            sortSequence("input/seq_int3.txt", "temp.txt")
+            assertFileContent("temp.txt",
+                    """
+                       1
+                       1
+                       2
+                       2
+                       3
+                       3
+                       5
+                       4
+                       4
+                       4
+                       4
+                    """.trimIndent()
+            )
+        } finally {
+            File("temp.txt").delete()
+        }
 
         fun BufferedWriter.writeNumbers(numbers: List<Int>) {
             for (n in numbers) {
