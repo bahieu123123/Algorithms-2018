@@ -114,6 +114,22 @@ abstract class AbstractTaskTests : AbstractFileTests() {
         }
         testGeneratedTemperatures(10)
         testGeneratedTemperatures(500)
+        try {
+            sortTemperatures("input/temp_int2.txt", "temp.txt")
+            assertFileContent("temp.txt",
+                    """
+                        2.7
+                        2.7
+                        2.7
+                        2.7
+                        2.7
+                        2.7
+                        2.7
+                    """.trimIndent()
+            )
+        } finally {
+            File("temp.txt").delete()
+        }
     }
 
     protected fun sortSequence(sortSequence: (String, String) -> Unit) {
