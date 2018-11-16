@@ -162,20 +162,18 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     public class BinaryTreeIterator implements Iterator<T> {
 
         private Node<T> current = null;
-        private int location = 1;
-        private List<Node<T>> list;
-
+        private int location = 0;
+        private ArrayList<Node> list;
+        private void addToList(Node node) {
+            if (node != null) {
+                addToList(node.left);
+                list.add(node);
+                addToList(node.right);
+            }
+        }
         private BinaryTreeIterator() {
             list = new ArrayList<>();
-            list.add(root);
-        }
-
-        private void addToList(Node<T> node) {
-            if (node != null) {
-                list.add(node.left);
-                list.add(node);
-                list.add(node.right);
-            }
+            addToList(root);
         }
 
         /**
@@ -203,9 +201,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
          */
         @Override
         public void remove() {
-            BinaryTree.this.remove(list.get(location));
-            list.remove(location);
-            location--;
+            throw new NotImplementedError();
         }
     }
 
