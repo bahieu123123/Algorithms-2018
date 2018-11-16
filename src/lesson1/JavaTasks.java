@@ -57,7 +57,7 @@ public class JavaTasks {
             fw.write(String.format("%02d:%02d:%02d",element/3600,(element%3600)/60,element%60)+"\n");
         }
         fw.close();
-        //трудоёмкост:O(log(n)) - n :количество входных строк
+        //трудоёмкост:O(n*log(n)) - n :количество входных строк
         // ресурсоёмкост:O(n)
     }
 

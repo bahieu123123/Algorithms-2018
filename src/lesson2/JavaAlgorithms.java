@@ -207,7 +207,7 @@ public class JavaAlgorithms {
         List<String[]> list = new ArrayList<>();
         String str;
         while ((str = br.readLine()) != null) {
-            String[] string=str.split(" ");
+            String[] string = str.split(" ");
             list.add(string);
         }
         String[][] matrix = new String[list.size()][list.get(0).length];
@@ -230,23 +230,24 @@ public class JavaAlgorithms {
         }
         return result;
     }
-        static private boolean check(String[][] matrix, int row, int col, String word) {
-            if (word.length() == 1) return true;
-            if (row > 0 && matrix[row - 1][col].equals(word.valueOf(word.charAt(1)))) {
-                if (check(matrix, row - 1, col, word.substring(1))) return true;
-            }
-            if (col > 0 && matrix[row][col - 1].equals(word.valueOf(word.charAt(1)))) {
-                if (check(matrix, row, col - 1, word.substring(1))) return true;
-            }
-            if (row < matrix.length - 1 && matrix[row + 1][col].equals(word.valueOf(word.charAt(1)))) {
-                if (check(matrix, row + 1, col, word.substring(1))) return true;
-            }
-            if (col < matrix[0].length - 1 && matrix[row][col + 1].equals(word.valueOf(word.charAt(1)))) {
-                if (check(matrix, row, col + 1, word.substring(1))) return true;
-            }
-            return false;
 
+    static private boolean check(String[][] matrix, int r, int c, String word) {
+        if (word.length() == 1) return true;
+        if (r > 0 && matrix[r - 1][c].equals(word.valueOf(word.charAt(1)))) {
+            if (check(matrix, r - 1, c, word.substring(1))) return true;
         }
+        if (c > 0 && matrix[r][c - 1].equals(word.valueOf(word.charAt(1)))) {
+            if (check(matrix, r, c - 1, word.substring(1))) return true;
+        }
+        if (r < matrix.length - 1 && matrix[r + 1][c].equals(word.valueOf(word.charAt(1)))) {
+            if (check(matrix, r + 1, c, word.substring(1))) return true;
+        }
+        if (c < matrix[0].length - 1 && matrix[r][c + 1].equals(word.valueOf(word.charAt(1)))) {
+            if (check(matrix, r, c + 1, word.substring(1))) return true;
+        }
+        return false;
+
+    }
     // трудоёмкост : O(n*m) - n это число строк,m это число букв в одной строке
     // ресурсоёмкост : O(n*m)
 
