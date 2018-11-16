@@ -132,6 +132,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     }
     // трудоёмкост : O(log(n)) n- количество node дерева
     // ресурсоёмкост : O(1)
+    // Cоветоваться: https://www.youtube.com/watch?v=4xTLz5eKT0k
 
     @Override
     public boolean contains(Object o) {
