@@ -237,6 +237,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     @Override
     public SortedSet<T> subSet(T fromElement, T toElement) {
         if (fromElement == null || toElement == null) throw new NoSuchElementException();
+        if (fromElement==toElement) return null;
         return subSet(fromElement, toElement, false);
     }
 
@@ -273,8 +274,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     @NotNull
     @Override
     public SortedSet<T> headSet(T toElement) {
-        // TODO
-        throw new NotImplementedError();
+        SortedSet<T> set = subSet(first(), toElement, false);
+        return set;
     }
 
     /**
@@ -284,8 +285,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     @NotNull
     @Override
     public SortedSet<T> tailSet(T fromElement) {
-        // TODO
-        throw new NotImplementedError();
+        SortedSet<T> set = subSet(fromElement, last(), true);
+        return set;
     }
 
     @Override
