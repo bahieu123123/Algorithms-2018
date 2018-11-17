@@ -94,7 +94,11 @@ abstract class AbstractHeadTailTest {
     }
 
     protected fun doSubSetTest() {
-        TODO()
+        val tree = BinaryTree<Int>()
+        val list = Arrays.asList(2, 4, 8, 6, 1, 3, 5, 7, 9)
+        tree.addAll(list)
+        val set = tree.subSet(2, 8)
+        assertEquals(6,set.size)
     }
 
 }
