@@ -1,11 +1,7 @@
 package lesson3
 
-import java.util.SortedSet
+import java.util.*
 import kotlin.test.*
-import java.util.Collections.addAll
-import java.util.Arrays
-
-
 
 abstract class AbstractHeadTailTest {
     private lateinit var tree: SortedSet<Int>
@@ -98,12 +94,7 @@ abstract class AbstractHeadTailTest {
     }
 
     protected fun doSubSetTest() {
-        val tree = BinaryTree<Int>()
-        val list = Arrays.asList(2, 4, 8, 6, 1, 3, 5, 7, 9)
-        tree.addAll(list)
-        println(list)
-        val set = tree.subSet(2, 8)
-        println(set)
+        //TODO
     }
 
 }

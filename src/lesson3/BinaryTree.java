@@ -186,8 +186,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         private Node<T> findNext() {
             return list.get(location++);
         }
-        // трудоёмкост : O(h) - h высота дерева
-        // ресурсоёмкост : O(1)
+        // трудоёмкост : O(1)
+        // ресурсоёмкост : O(h) - h высота дерева
 
         @Override
         public boolean hasNext() {
@@ -265,6 +265,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         if (compareTo < 0)
             subSet(current.right, set, fromElement, toElement, include);
     }
+    // трудоёмкост : O(n) n- количество node дерева
+    // ресурсоёмкост : O(1)
 
 
     /**
@@ -277,6 +279,9 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         SortedSet<T> set = subSet(first(), toElement, false);
         return set;
     }
+    // трудоёмкост : O(n) n- количество node дерева
+    // ресурсоёмкост : O(1)
+
 
     /**
      * Найти множество всех элементов больше или равных заданного
@@ -288,6 +293,9 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         SortedSet<T> set = subSet(fromElement, last(), true);
         return set;
     }
+    // трудоёмкост : O(n) n- количество node дерева
+    // ресурсоёмкост : O(1)
+
 
     @Override
     public T first() {
