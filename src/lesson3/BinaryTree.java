@@ -165,6 +165,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         private Node<T> current = null;
         private int location = 0;
         private ArrayList<Node> list;
+
         private void addToList(Node node) {
             if (node != null) {
                 addToList(node.left);
@@ -172,6 +173,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
                 addToList(node.right);
             }
         }
+
         private BinaryTreeIterator() {
             list = new ArrayList<>();
             addToList(root);
@@ -184,6 +186,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         private Node<T> findNext() {
             return list.get(location++);
         }
+        // трудоёмкост : O(h) - h высота дерева
+        // ресурсоёмкост : O(1)
 
         @Override
         public boolean hasNext() {
@@ -193,6 +197,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         @Override
         public T next() {
             current = findNext();
+            if (current == null) throw new NoSuchElementException();
             return current.value;
         }
 
@@ -231,9 +236,35 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     @NotNull
     @Override
     public SortedSet<T> subSet(T fromElement, T toElement) {
-        // TODO
-        throw new NotImplementedError();
+        if (fromElement == null || toElement == null) throw new NoSuchElementException();
+        return subSet(fromElement, toElement, false);
     }
+
+    private SortedSet<T> subSet(T fromElement, T toElement, boolean include) {
+        SortedSet<T> set = new TreeSet<>();
+        subSet(root, set, fromElement, toElement, include);
+        return set;
+    }
+
+    private void subSet(Node<T> current, SortedSet<T> set, T fromElement,
+                        T toElement, boolean include) {
+        if (current == null)
+            return;
+        int compareFrom = current.value.compareTo(fromElement);
+        int compareTo = current.value.compareTo(toElement);
+        if (compareFrom > 0)
+            subSet(current.left, set, fromElement, toElement, include);
+        if (include) {
+            if (compareFrom >= 0 && compareTo <= 0)
+                set.add(current.value);
+        } else {
+            if (compareFrom >= 0 && compareTo < 0)
+                set.add(current.value);
+        }
+        if (compareTo < 0)
+            subSet(current.right, set, fromElement, toElement, include);
+    }
+
 
     /**
      * Найти множество всех элементов меньше заданного
