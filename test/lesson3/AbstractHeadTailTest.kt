@@ -94,7 +94,7 @@ abstract class AbstractHeadTailTest {
     }
 
     protected fun doSubSetTest() {
-        //TODO
+        TODO()
     }
 
 }
