@@ -1,13 +1,17 @@
 package lesson6;
 
 import kotlin.NotImplementedError;
+import lesson1.Sorts;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @SuppressWarnings("unused")
@@ -103,7 +107,37 @@ public class JavaDynamicTasks {
      * В примере ответами являются 2, 8, 9, 12 или 2, 5, 9, 12 -- выбираем первую из них.
      */
     public static List<Integer> longestIncreasingSubSequence(List<Integer> list) {
-        throw new NotImplementedError();
+        if (list.size() <= 1) {
+            return list;
+        }
+        int[] length = new int[list.size()];
+        length[0] = 1;
+        int[] list2 = new int[list.size()];
+        Arrays.fill(list2, -1);
+        int maxPosition = 0;
+        for (int i = 1; i < list.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (list.get(j) < list.get(i)) {
+                    if (length[j] + 1 > length[i]) {
+                        length[i] = length[j] + 1;
+                        list2[i] = j;
+                    }
+                    if (length[maxPosition] < length[i]) {
+                        maxPosition = i;
+                    }
+                }
+            }
+        }
+        int count = length[maxPosition];
+        List<Integer> result=new ArrayList<>();
+        int i = maxPosition;
+        while (i >= 0) {
+            result.add(list.get(i));
+            i = list2[i];
+            count--;
+        }
+        Collections.reverse(result);
+        return result;
     }
 
     /**
@@ -151,7 +185,7 @@ public class JavaDynamicTasks {
                     matrix[i][j] = matrix[i][j] + Math.min(Math.min(matrix[i][j - 1], matrix[i - 1][j]), matrix[i - 1][j - 1]);
             }
         }
-        return matrix[list.size()-1][list.get(0).length-1];
+        return matrix[list.size() - 1][list.get(0).length - 1];
         // Трудоемкость T = O(n*m) n-количество строк ввода,m-количество входных столбцов
         // Ресурсоемкость R = O(n*m)
     }
