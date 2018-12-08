@@ -138,6 +138,8 @@ public class JavaDynamicTasks {
         }
         Collections.reverse(result);
         return result;
+        // Трудоемкость T = O(n^2) n-количество элементов в последовательности
+        // Ресурсоемкость R = O(n^2)
     }
 
     /**
